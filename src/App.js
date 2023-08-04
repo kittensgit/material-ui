@@ -3,7 +3,9 @@ import {
     Box,
     Button,
     Container,
+    Grid,
     IconButton,
+    Paper,
     Toolbar,
     Typography,
 } from '@mui/material';
@@ -26,6 +28,25 @@ const useStyles = makeStyles((theme) => ({
     title: {
         flexGrow: 1,
     },
+    mainFeaturesPost: {
+        position: 'relative',
+        marginBottom: spacing(4),
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+    },
+    mainFeaturesPostContent: {
+        position: 'relative',
+        padding: spacing(9),
+    },
+    overlay: {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        right: 0,
+        left: 0,
+        backgroundOverlay: 'rgba(0,0,0,.3)',
+    },
 }));
 
 function App() {
@@ -34,6 +55,7 @@ function App() {
         <ThemeProvider theme={theme}>
             <AppBar position="fixed">
                 <Container fixed>
+                    <div className={classes.overlay} />
                     <Toolbar>
                         <IconButton
                             edge="start"
@@ -57,6 +79,50 @@ function App() {
                     </Toolbar>
                 </Container>
             </AppBar>
+
+            <main>
+                <Paper
+                    className={classes.mainFeaturesPost}
+                    style={{
+                        backgroundImage: `url(https://source.unsplash.com/random)`,
+                    }}
+                >
+                    <Container fixed>
+                        <Grid container>
+                            <Grid item md={6} mb={4}>
+                                <div
+                                    className={classes.mainFeaturesPostContent}
+                                >
+                                    <Typography
+                                        mt={9}
+                                        component="h1"
+                                        variant="h3"
+                                        color="inherit"
+                                        gutterBottom
+                                    >
+                                        Material UI
+                                    </Typography>
+                                    <Typography
+                                        variant="h5"
+                                        color="inherit"
+                                        paragraph
+                                    >
+                                        Tempor velit consectetur amet amet ipsum
+                                        nisi exercitation aliquip excepteur
+                                        exercitation nostrud.
+                                    </Typography>
+                                    <Button
+                                        color="secondary"
+                                        variant="contained"
+                                    >
+                                        Learn more
+                                    </Button>
+                                </div>
+                            </Grid>
+                        </Grid>
+                    </Container>
+                </Paper>
+            </main>
         </ThemeProvider>
     );
 }
