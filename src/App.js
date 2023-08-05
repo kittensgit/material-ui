@@ -2,6 +2,10 @@ import {
     AppBar,
     Box,
     Button,
+    Card,
+    CardActions,
+    CardContent,
+    CardMedia,
     Container,
     Grid,
     IconButton,
@@ -11,14 +15,15 @@ import {
 } from '@mui/material';
 import React from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
+import LayersIcon from '@mui/icons-material/Layers';
+import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
 import { ThemeProvider, makeStyles } from '@mui/styles';
 import { createTheme } from '@mui/material/styles';
 import { spacing } from '@mui/system';
 
 const theme = createTheme();
-console.log(theme);
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     root: {
         flexGrow: 1,
     },
@@ -37,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     },
     mainFeaturesPostContent: {
         position: 'relative',
-        padding: spacing(9),
+        padding: spacing(6),
     },
     overlay: {
         position: 'absolute',
@@ -47,7 +52,18 @@ const useStyles = makeStyles((theme) => ({
         left: 0,
         backgroundOverlay: 'rgba(0,0,0,.3)',
     },
+    cardMedia: {
+        paddingTop: '56.25%',
+    },
+    cardContent: {
+        flexGrow: 1,
+    },
+    cardGrid: {
+        marginTop: '32px',
+    },
 }));
+
+const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 function App() {
     const classes = useStyles();
@@ -97,14 +113,14 @@ function App() {
                                         mt={9}
                                         component="h1"
                                         variant="h3"
-                                        color="inherit"
+                                        color="white"
                                         gutterBottom
                                     >
                                         Material UI
                                     </Typography>
                                     <Typography
                                         variant="h5"
-                                        color="inherit"
+                                        color="white"
                                         paragraph
                                     >
                                         Tempor velit consectetur amet amet ipsum
@@ -122,6 +138,88 @@ function App() {
                         </Grid>
                     </Container>
                 </Paper>
+                <div className={classes.mainContent}>
+                    <Container maxWidth="md">
+                        <Typography
+                            variant="h2"
+                            align="center"
+                            color="textPrimary"
+                            gutterBottom
+                        >
+                            Material UI
+                        </Typography>
+                        <Typography
+                            variant="h5"
+                            align="center"
+                            color="textSecondary"
+                            paragraph
+                        >
+                            Do ea sint nulla do enim duis pariatur et duis ut
+                            mollit. Velit Lorem aliqua amet magna voluptate.
+                            Irure id ea anim occaecat occaecat adipisicing
+                            aliqua est aute. Nisi officia irure consectetur
+                            magna ex culpa fugiat.
+                        </Typography>
+                        <div className={classes.mainButtons}>
+                            <Grid
+                                container
+                                spacing={2}
+                                justifyContent="center"
+                                mb={2}
+                            >
+                                <Grid item>
+                                    <Button variant="contained" color="primary">
+                                        Start Now
+                                    </Button>
+                                </Grid>
+                                <Grid item>
+                                    <Button
+                                        variant="outlined"
+                                        color="secondary"
+                                    >
+                                        Learn more
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </div>
+                    </Container>
+                </div>
+                <Container className={classes.cardGrid} maxWidth="md">
+                    <Grid container spacing={4}>
+                        {cards.map((card) => (
+                            <Grid item key={card} xs={12} sm={6} md={4}>
+                                <Card className={classes.card}>
+                                    <CardMedia
+                                        image="https://source.unsplash.com/random"
+                                        title="image title"
+                                        className={classes.cardMedia}
+                                    />
+                                    <CardContent
+                                        className={classes.cardContent}
+                                    >
+                                        <Typography variant="h5" gutterBottom>
+                                            Blog post
+                                        </Typography>
+                                        <Typography>
+                                            Blog post. Amet occaecat sint nulla
+                                            consectetur nisi ullamco.
+                                        </Typography>
+                                    </CardContent>
+                                    <CardActions>
+                                        <Button size="small" color="primary">
+                                            View
+                                        </Button>
+                                        <Button size="small" color="primary">
+                                            Edit
+                                        </Button>
+                                        <LayersIcon />
+                                        <PlayCircleFilledIcon />
+                                    </CardActions>
+                                </Card>
+                            </Grid>
+                        ))}
+                    </Grid>
+                </Container>
             </main>
         </ThemeProvider>
     );
