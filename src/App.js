@@ -1,5 +1,7 @@
 import {
     AppBar,
+    BottomNavigation,
+    BottomNavigationAction,
     Box,
     Button,
     Card,
@@ -13,10 +15,18 @@ import {
     Toolbar,
     Typography,
 } from '@mui/material';
-import React from 'react';
+
+import React, { useState } from 'react';
+
 import MenuIcon from '@mui/icons-material/Menu';
 import LayersIcon from '@mui/icons-material/Layers';
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
+
+import RestoreIcon from '@mui/icons-material/Restore';
+import FolderIcon from '@mui/icons-material/Folder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+
 import { ThemeProvider, makeStyles } from '@mui/styles';
 import { createTheme } from '@mui/material/styles';
 import { spacing } from '@mui/system';
@@ -67,6 +77,12 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 function App() {
     const classes = useStyles();
+    const [value, setValue] = useState('recents');
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+
     return (
         <ThemeProvider theme={theme}>
             <AppBar position="fixed">
@@ -221,6 +237,46 @@ function App() {
                     </Grid>
                 </Container>
             </main>
+
+            <footer>
+                <Typography variant="h6" align="center" gutterBottom>
+                    Footer
+                </Typography>
+                <BottomNavigation
+                    value={value}
+                    onChange={handleChange}
+                    className={classes.root}
+                >
+                    <BottomNavigationAction
+                        label="Recents"
+                        value="recents"
+                        icon={<RestoreIcon />}
+                    />
+                    <BottomNavigationAction
+                        label="Favorites"
+                        value="favorites"
+                        icon={<FavoriteIcon />}
+                    />
+                    <BottomNavigationAction
+                        label="Nearby"
+                        value="nearby"
+                        icon={<LocationOnIcon />}
+                    />
+                    <BottomNavigationAction
+                        label="Folder"
+                        value="folder"
+                        icon={<FolderIcon />}
+                    />
+                </BottomNavigation>
+                <Typography
+                    align="center"
+                    color="textSecondary"
+                    component={'p'}
+                    variant="subtitle1"
+                >
+                    Website with Material UI
+                </Typography>
+            </footer>
         </ThemeProvider>
     );
 }
