@@ -9,9 +9,15 @@ import {
     CardContent,
     CardMedia,
     Container,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
     Grid,
     IconButton,
     Paper,
+    TextField,
     Toolbar,
     Typography,
 } from '@mui/material';
@@ -83,6 +89,15 @@ function App() {
         setValue(newValue);
     };
 
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     return (
         <ThemeProvider theme={theme}>
             <AppBar position="fixed">
@@ -101,9 +116,57 @@ function App() {
                             Website MUI
                         </Typography>
                         <Box mr={3}>
-                            <Button color="inherit" variant="outlined">
+                            <Button
+                                color="inherit"
+                                variant="outlined"
+                                onClick={handleClickOpen}
+                            >
                                 Log In
                             </Button>
+                            <Dialog
+                                open={open}
+                                onClose={handleClose}
+                                aria-labelledby="form-dialog-title"
+                            >
+                                <DialogTitle id="form-dialog-title">
+                                    Log In
+                                </DialogTitle>
+                                <DialogContent>
+                                    <DialogContentText>
+                                        Log In to see videos
+                                    </DialogContentText>
+                                    <TextField
+                                        autoFocus
+                                        margin="dense"
+                                        id="name"
+                                        label="Email Adress"
+                                        type="email"
+                                        fullWidth
+                                    />
+                                    <TextField
+                                        autoFocus
+                                        margin="dense"
+                                        id="password"
+                                        label="Password"
+                                        type="password"
+                                        fullWidth
+                                    />
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button
+                                        onClick={handleClose}
+                                        color="primary"
+                                    >
+                                        Cancel
+                                    </Button>
+                                    <Button
+                                        onClick={handleClose}
+                                        color="primary"
+                                    >
+                                        Log In
+                                    </Button>
+                                </DialogActions>
+                            </Dialog>
                         </Box>
                         <Button color="secondary" variant="contained">
                             Sign Up
